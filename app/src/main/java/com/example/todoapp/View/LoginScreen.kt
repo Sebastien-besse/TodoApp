@@ -24,7 +24,7 @@ import androidx.compose.runtime.setValue
 
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(onLoginSuccess: () -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -32,7 +32,7 @@ fun LoginScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Background), // fond gris clair
+            .background(Background),
         contentAlignment = Alignment.TopCenter
     ) {
         Column(
@@ -56,7 +56,7 @@ fun LoginScreen() {
                 fontWeight = FontWeight.Medium,
                 color = Color.White
             )
-
+            // Champ de l'email
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
@@ -72,7 +72,7 @@ fun LoginScreen() {
                 fontWeight = FontWeight.Medium,
                 color = Color.White
             )
-            // Password field
+            // Champ du mot de passe
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -89,9 +89,12 @@ fun LoginScreen() {
 
             Spacer(modifier = Modifier.height(80.dp))
 
-            // Login button
+            // Bouton de connexion
             Button(
-                onClick = {auth.login(email, password)},
+                onClick = {
+                    auth.login(email, password)
+                    onLoginSuccess()
+                          },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = PrimaryPurple
                 ),
@@ -110,6 +113,6 @@ fun LoginScreen() {
 @Composable
 fun AuthPreview() {
     TodoAppTheme {
-        LoginScreen()
+        LoginScreen(onLoginSuccess = {})
     }
 }
