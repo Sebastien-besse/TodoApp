@@ -7,7 +7,6 @@ import com.google.firebase.auth.auth
 class AuthViewModel {
     val auth = Firebase.auth
 
-
     fun validateEmail(email: String): Boolean{
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }

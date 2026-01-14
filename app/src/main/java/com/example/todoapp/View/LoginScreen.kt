@@ -27,8 +27,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 
 @Composable
 fun LoginScreen(onLoginSuccess: () -> Unit) {
-
-
+    
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -57,12 +56,12 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
 
             Spacer(modifier = Modifier.height(200.dp))
             // Champ de l'email
-            TextFieldComponant("Username",email, onValueChange = {email = it}, emailError, refreshError = {emailError = false}, "Format de l'email invalide", "Enter your email")
+            TextFieldComponent("Username",email, onValueChange = {email = it}, emailError, refreshError = {emailError = false}, "Format de l'email invalide", "Enter your email")
 
             Spacer(modifier = Modifier.height(16.dp))
 
             // Champ du mot de passe
-            TextFieldComponant("Password",password, onValueChange = {password = it}, passwordError, refreshError = {passwordError = false}, "Mot de passe trop court", "••••••••", visualTransformation = PasswordVisualTransformation())
+            TextFieldComponent("Password",password, onValueChange = {password = it}, passwordError, refreshError = {passwordError = false}, "Mot de passe trop court", "••••••••", visualTransformation = PasswordVisualTransformation())
 
             Spacer(modifier = Modifier.height(80.dp))
 
@@ -100,7 +99,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
 
 // Composant de la description du champ de texte
 @Composable
-fun descriptionComponant(text: String){
+fun DescriptionComponent(text: String){
     Text(
         text = text,
         fontSize = 16.sp,
@@ -111,8 +110,8 @@ fun descriptionComponant(text: String){
 
 // Composant pour les champs email et mot de passe avec contrôle de saisie
 @Composable
-fun TextFieldComponant(text: String, value: String, onValueChange: (String) -> Unit, valueError: Boolean, refreshError: ()->Unit, errorMessage: String, label: String, visualTransformation: VisualTransformation = VisualTransformation.None){
-    descriptionComponant(text)
+fun TextFieldComponent(text: String, value: String, onValueChange: (String) -> Unit, valueError: Boolean, refreshError: ()->Unit, errorMessage: String, label: String, visualTransformation: VisualTransformation = VisualTransformation.None){
+    DescriptionComponent(text)
     OutlinedTextField(
         value = value,
         onValueChange = { newValue ->
