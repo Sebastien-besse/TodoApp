@@ -24,7 +24,7 @@ import com.example.todoapp.ui.theme.Background
 import com.example.todoapp.ui.theme.PrimaryPurple
 
 @Composable
-fun todo(){
+fun Todo(){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -63,5 +63,5 @@ fun todo(){
 @Preview
 @Composable
 fun todoPreview(){
-    todo()
+    Todo()
 }

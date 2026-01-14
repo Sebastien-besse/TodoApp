@@ -21,7 +21,7 @@ fun AppNavigation() {
         }
         // Écran d'atterrissage
         composable("todo") {
-            todo()
+            Todo()
         }
     }
 }
