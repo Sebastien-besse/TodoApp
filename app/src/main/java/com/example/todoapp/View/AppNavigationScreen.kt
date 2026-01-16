@@ -4,23 +4,26 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.todoapp.Model.LoginRoute
+import com.example.todoapp.Model.TodoRoute
+
 
 @Composable
 fun AppNavigation() {
 
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "login") {
+    NavHost(navController = navController, startDestination = LoginRoute) {
         // Écran de connexion
-        composable("login") {
+        composable<LoginRoute> {
             LoginScreen(
                 onLoginSuccess = {
-                    navController.navigate("todo")
+                    navController.navigate(TodoRoute)
                 }
             )
         }
         // Écran d'atterrissage
-        composable("todo") {
+        composable<TodoRoute> {
             Todo()
         }
     }

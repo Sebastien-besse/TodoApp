@@ -1,11 +1,13 @@
 package com.example.todoapp.View
 
+import com.example.todoapp.R
+import  com.example.todoapp.View.Components.TextFieldComponent
+
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -17,28 +19,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.todoapp.ViewModel.AuthViewModel
-import com.example.todoapp.ui.theme.Background
-import com.example.todoapp.ui.theme.PrimaryPurple
 import com.example.todoapp.ui.theme.TodoAppTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
-fun LoginScreen(onLoginSuccess: () -> Unit) {
-    
-    var email by remember { mutableStateOf("") }
+fun LoginScreen(onLoginSuccess: () -> Unit, auth: AuthViewModel = viewModel<AuthViewModel>()) {
     var password by remember { mutableStateOf("") }
 
-    var emailError by remember { mutableStateOf(false) }
     var passwordError by remember { mutableStateOf(false) }
 
-    val auth = AuthViewModel()
+    val uiState by auth.uiState.collectAsStateWithLifecycle()
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Background),
+            .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.TopCenter
     ) {
         Column(
@@ -55,36 +55,54 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
             )
 
             Spacer(modifier = Modifier.height(200.dp))
+
             // Champ de l'email
-            TextFieldComponent("Username",email, onValueChange = {email = it}, emailError, refreshError = {emailError = false}, "Format de l'email invalide", "Enter your email")
+            TextFieldComponent(
+                text = stringResource(R.string.login_email_label),
+                value = uiState.email,
+                onValueChange = { auth.updateEmail(it) },
+                valueError = uiState.isEmailError,
+                refreshError = {},
+                errorMessage = stringResource(R.string.login_email_error),
+                label = stringResource(R.string.login_email_placeholder)
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             // Champ du mot de passe
-            TextFieldComponent("Password",password, onValueChange = {password = it}, passwordError, refreshError = {passwordError = false}, "Mot de passe trop court", "••••••••", visualTransformation = PasswordVisualTransformation())
+            TextFieldComponent(
+                text = stringResource(R.string.login_password_label),
+                password,
+                onValueChange = {password = it},
+                passwordError,
+                refreshError = {passwordError = false},
+                stringResource(R.string.login_password_error),
+                stringResource(R.string.login_password_placeholder),
+                visualTransformation = PasswordVisualTransformation()
+            )
 
             Spacer(modifier = Modifier.height(80.dp))
 
             // Bouton de connexion
             Button(
                 onClick = {
+                        auth.checkEmailValidation()
                         // Vérification de saisie de l'email et du mot de passe avant connexion
-                        val isEmailValid = auth.validateEmail(email)
                         val isPasswordValid = auth.validatePassword(password)
 
                         // mise à jour des états d'erreurs
-                        emailError = !isEmailValid
+
                         passwordError = !isPasswordValid
 
                         // Si les prérequis des champs sont valide le bouton login est activé
-                        if(isEmailValid && isPasswordValid){
-                            auth.login(email, password)
+                        if(!uiState.isEmailError && isPasswordValid){
+                            auth.login(uiState.email, password)
                             onLoginSuccess()
                         }
 
                           },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = PrimaryPurple
+                    containerColor = MaterialTheme.colorScheme.primary
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -97,52 +115,11 @@ fun LoginScreen(onLoginSuccess: () -> Unit) {
     }
 }
 
-// Composant de la description du champ de texte
-@Composable
-fun DescriptionComponent(text: String){
-    Text(
-        text = text,
-        fontSize = 16.sp,
-        fontWeight = FontWeight.Medium,
-        color = Color.White
-    )
-}
 
-// Composant pour les champs email et mot de passe avec contrôle de saisie
-@Composable
-fun TextFieldComponent(text: String, value: String, onValueChange: (String) -> Unit, valueError: Boolean, refreshError: ()->Unit, errorMessage: String, label: String, visualTransformation: VisualTransformation = VisualTransformation.None){
-    DescriptionComponent(text)
-    OutlinedTextField(
-        value = value,
-        onValueChange = { newValue ->
-            onValueChange(newValue)
-            refreshError()
-        },
-        isError = valueError,
-        supportingText ={
-            if (valueError) {
-                Text(errorMessage)
-            }
-        } ,
-        label = {
-            Text(label,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-            )
-        },
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedTextColor = Color.White,
-            focusedLabelColor = Color.DarkGray
-        ),
-        singleLine = true,
-        modifier = Modifier.fillMaxWidth(),
-        visualTransformation = visualTransformation
-    )
-}
 
 @Preview(showBackground = true)
 @Composable
-fun AuthPreview() {
+fun LoginPreview() {
     TodoAppTheme {
         LoginScreen(onLoginSuccess = {})
     }

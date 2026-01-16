@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,15 +21,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.todoapp.ui.theme.Background
-import com.example.todoapp.ui.theme.PrimaryPurple
 
 @Composable
 fun Todo(){
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Background),
+            .background(MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
     ){
         Text(
@@ -42,7 +41,7 @@ fun Todo(){
         Button(
             onClick = {},
             colors = ButtonDefaults.buttonColors(
-                containerColor = PrimaryPurple
+                containerColor = MaterialTheme.colorScheme.primary
             ),
             modifier = Modifier
                 .size(60.dp)
@@ -62,6 +61,6 @@ fun Todo(){
 
 @Preview
 @Composable
-fun todoPreview(){
+fun TodoPreview(){
     Todo()
 }
