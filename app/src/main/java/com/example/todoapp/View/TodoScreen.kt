@@ -61,6 +61,6 @@ fun Todo(){
 
 @Preview
 @Composable
-fun TodoPreview(){
+private fun TodoPreview(){
     Todo()
 }

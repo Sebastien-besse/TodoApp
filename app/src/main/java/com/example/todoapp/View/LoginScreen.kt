@@ -119,7 +119,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit, auth: AuthViewModel = viewModel<Auth
 
 @Preview(showBackground = true)
 @Composable
-fun LoginPreview() {
+private fun LoginPreview() {
     TodoAppTheme {
         LoginScreen(onLoginSuccess = {})
     }
