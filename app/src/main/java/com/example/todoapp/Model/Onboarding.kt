@@ -17,10 +17,5 @@ data class Onboarding (
         )
     }
 }
-enum class OnboardingItems(val item: Onboarding){
-    Manage(Onboarding.pages[0]),
-    Create(Onboarding.pages[1]),
-    Organize(Onboarding.pages[2])
-}
 
 
