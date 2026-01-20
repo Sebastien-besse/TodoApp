@@ -23,4 +23,8 @@
     <string name="onboarding_button_started">GET STARTED</string>
     <string name="onboarding_button_back">BACK</string>
 
+    <string name="start_title">Welcome to UpTodo</string>
+    <string name="start_content">Please login to your account or create new account to continue</string>
+    <string name="start_button_login">LOGIN</string>
+    <string name="start_button_create_account">CREATE ACCOUNT</string>
 </resources>

@@ -13,3 +13,6 @@ object LoginRoute
 @Serializable
 object TodoRoute
 
+@Serializable
+object StartRoute
+

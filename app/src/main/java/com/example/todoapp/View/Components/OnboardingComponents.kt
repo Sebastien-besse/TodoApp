@@ -55,6 +55,28 @@ fun PageIndicator(pageSize: Int, currentPage: Int) {
     }
 }
 
+@Composable
+fun OnboardingtextComponents(title: Int, text: Int){
+    Spacer(modifier = Modifier.height(60.dp))
+
+    Text(
+        text = stringResource(id = title),
+        fontSize = 32.sp,
+        fontWeight = FontWeight.Bold,
+        color = Color.White,
+        textAlign = TextAlign.Center
+    )
+
+    Spacer(modifier = Modifier.height(60.dp))
+
+    Text(
+        text = stringResource(id = text),
+        fontSize = 16.sp,
+        color = Color.White.copy(alpha = 0.7f),
+        textAlign = TextAlign.Center,
+        modifier = Modifier.padding(horizontal = 16.dp)
+    )
+}
 // Composant du contenu de l'onboarding
 @Composable
 fun OnboardingComponent(
@@ -83,24 +105,6 @@ fun OnboardingComponent(
         // L'indicateur de page
         PageIndicator(pageSize = pageSize, currentPage = currentPage)
 
-        Spacer(modifier = Modifier.height(60.dp))
-
-        Text(
-            text = stringResource(id = page.title),
-            fontSize = 32.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            textAlign = TextAlign.Center
-        )
-
-        Spacer(modifier = Modifier.height(60.dp))
-
-        Text(
-            text = stringResource(id = page.content),
-            fontSize = 16.sp,
-            color = Color.White.copy(alpha = 0.7f),
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 16.dp)
-        )
+        OnboardingtextComponents(page.title, page.content)
     }
 }

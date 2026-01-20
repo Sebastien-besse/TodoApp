@@ -9,8 +9,8 @@ import com.example.todoapp.Model.LoginRoute
 import com.example.todoapp.Model.TodoRoute
 import com.example.todoapp.Model.IntroRoute
 import com.example.todoapp.Model.OnboardingRoute
+import com.example.todoapp.Model.StartRoute
 import kotlinx.coroutines.delay
-
 
 @Composable
 fun AppNavigation() {
@@ -30,6 +30,7 @@ fun AppNavigation() {
            }
 
         }
+
         // Écran de connexion
         composable<LoginRoute> {
             LoginScreen(
@@ -38,17 +39,32 @@ fun AppNavigation() {
                 }
             )
         }
+
         // Ecran de l'onboarding
         composable<OnboardingRoute> {
             OnboardingScreen(
                 onFinish = {
-                    navController.navigate(LoginRoute)
+                    navController.navigate(StartRoute)
                 }
             )
         }
+
+        //Ecran de démarage pour créer son compte ou se connecter
+        composable<StartRoute> {
+            StartScreen(
+                onLogin = {
+                    navController.navigate(LoginRoute)
+                },
+                onBack = {
+                    navController.navigate(OnboardingRoute)
+                }
+            )
+        }
+
         // Écran d'atterrissage
         composable<TodoRoute> {
             Todo()
         }
+
     }
 }

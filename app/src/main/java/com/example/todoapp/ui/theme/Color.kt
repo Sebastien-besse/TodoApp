@@ -68,4 +68,3 @@ val RedCategoryFont = Color(0xFFA30000)
 
 
 
-
