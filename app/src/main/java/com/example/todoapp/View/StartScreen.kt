@@ -23,9 +23,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.todoapp.R
 import com.example.todoapp.View.Components.OnboardingtextComponents
@@ -60,7 +60,7 @@ fun StartScreen(onLogin: () -> Unit, onBack: () -> Unit){
         ) {
             Text(
                 text = stringResource(R.string.start_button_login),
-                color = Color.White
+                color = MaterialTheme.colorScheme.onPrimary
             )
         }
         Spacer(Modifier.size(20.dp))
@@ -72,7 +72,7 @@ fun StartScreen(onLogin: () -> Unit, onBack: () -> Unit){
         ) {
             Text(
                 text = stringResource(R.string.start_button_create_account),
-                color = Color.White
+                color = MaterialTheme.colorScheme.onPrimary
             )
         }
     }
@@ -85,9 +85,13 @@ fun StartScreen(onLogin: () -> Unit, onBack: () -> Unit){
         Icon(
             rememberVectorPainter(Icons.AutoMirrored.Outlined.KeyboardArrowLeft),
             contentDescription = "Back",
-            tint = {Color.White}
-
+            tint = MaterialTheme.colorScheme.onPrimary
         )
-
     }
+}
+
+@Preview
+@Composable
+private fun StartPreview(){
+    StartScreen(onLogin = {}, onBack = {})
 }
