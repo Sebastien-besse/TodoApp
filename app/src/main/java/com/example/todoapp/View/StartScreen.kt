@@ -23,11 +23,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.todoapp.R
+import com.example.todoapp.View.Components.ButtonLarge
 import com.example.todoapp.View.Components.OnboardingtextComponents
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,57 +39,52 @@ fun StartScreen(onLogin: () -> Unit, onBack: () -> Unit){
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
-    )
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        OnboardingtextComponents(
-            R.string.start_title,
-            R.string.start_content
-        )
-        Spacer(Modifier.size(400.dp))
-        Button(
-            onClick = {onLogin()},
-            modifier = Modifier.size(height = 48.dp, width = 327.dp),
-            shape = RoundedCornerShape(4.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary
-            )
+        contentAlignment = Alignment.TopStart
+    ){
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
+                .padding(horizontal = 30.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
+            OnboardingtextComponents(
+                R.string.start_title,
+                R.string.start_content
+            )
+            Spacer(Modifier.size(400.dp))
+            ButtonLarge(
                 text = stringResource(R.string.start_button_login),
-                color = MaterialTheme.colorScheme.onPrimary
+                onClick = {
+                    onLogin()
+                },
+                isStroke = false
+            )
+            Spacer(Modifier.size(20.dp))
+            ButtonLarge(
+                text = stringResource(R.string.start_button_create_account),
+                onClick = {
+                    onBack()
+                },
+                isStroke = true
             )
         }
-        Spacer(Modifier.size(20.dp))
-        OutlinedButton(
-            onClick = {},
-            modifier = Modifier.size(height = 48.dp, width = 327.dp),
-            border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
-            shape = RoundedCornerShape(4.dp),
-        ) {
-            Text(
-                text = stringResource(R.string.start_button_create_account),
-                color = MaterialTheme.colorScheme.onPrimary
+
+        IconButton(
+            onClick = {onBack()},
+            modifier = Modifier
+                .padding(vertical = 80.dp),
+
+            ) {
+            Icon(
+                rememberVectorPainter(Icons.AutoMirrored.Outlined.KeyboardArrowLeft),
+                contentDescription = "Back",
+                tint = MaterialTheme.colorScheme.onPrimary
             )
         }
     }
 
-    IconButton(
-        onClick = {onBack()},
-        modifier = Modifier
-            .padding(vertical = 80.dp)
-    ) {
-        Icon(
-            rememberVectorPainter(Icons.AutoMirrored.Outlined.KeyboardArrowLeft),
-            contentDescription = "Back",
-            tint = MaterialTheme.colorScheme.onPrimary
-        )
-    }
 }
 
 @Preview

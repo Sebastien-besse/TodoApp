@@ -6,7 +6,6 @@ import  com.example.todoapp.View.Components.TextFieldComponent
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -25,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.todoapp.View.Components.ButtonLarge
 
 
 @Composable
@@ -48,7 +48,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit, auth: AuthViewModel = viewModel<Auth
                 .padding(24.dp)
         ) {
             Text(
-                text = "Login",
+                text = stringResource(R.string.login_title),
                 fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
@@ -73,9 +73,9 @@ fun LoginScreen(onLoginSuccess: () -> Unit, auth: AuthViewModel = viewModel<Auth
             TextFieldComponent(
                 text = stringResource(R.string.login_password_label),
                 password,
-                onValueChange = {password = it},
+                onValueChange = { password = it },
                 passwordError,
-                refreshError = {passwordError = false},
+                refreshError = { passwordError = false },
                 stringResource(R.string.login_password_error),
                 stringResource(R.string.login_password_placeholder),
                 visualTransformation = PasswordVisualTransformation()
@@ -83,39 +83,26 @@ fun LoginScreen(onLoginSuccess: () -> Unit, auth: AuthViewModel = viewModel<Auth
 
             Spacer(modifier = Modifier.height(80.dp))
 
-            // Bouton de connexion
-            Button(
+            ButtonLarge(
+                text = stringResource(R.string.login_title),
                 onClick = {
-                        auth.checkEmailValidation()
-                        // Vérification de saisie de l'email et du mot de passe avant connexion
-                        val isPasswordValid = auth.validatePassword(password)
+                    auth.checkEmailValidation()
+                    // Vérification de saisie de l'email et du mot de passe avant connexion
+                    val isPasswordValid = auth.validatePassword(password)
 
-                        // mise à jour des états d'erreurs
+                    // mise à jour des états d'erreurs
+                    passwordError = !isPasswordValid
 
-                        passwordError = !isPasswordValid
-
-                        // Si les prérequis des champs sont valide le bouton login est activé
-                        if(!uiState.isEmailError && isPasswordValid){
-                            auth.login(uiState.email, password)
-                            onLoginSuccess()
-                        }
-
-                          },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
-                shape = RoundedCornerShape(3.dp)
-            ) {
-                Text(text = "Login", fontSize = 16.sp)
-            }
+                    // Si les prérequis des champs sont valide le bouton login est activé
+                    if (!uiState.isEmailError && isPasswordValid) {
+                        auth.login(uiState.email, password)
+                        onLoginSuccess()
+                    }
+                })
         }
     }
+
 }
-
-
 
 @Preview(showBackground = true)
 @Composable

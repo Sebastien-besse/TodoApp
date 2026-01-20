@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TodoApp</string>
 
+    <string name="login_title">Login</string>
     <string name="login_email_label">Username</string>
     <string name="login_email_error">Format de l\'email invalide</string>
     <string name="login_email_placeholder">Enter your email</string>
