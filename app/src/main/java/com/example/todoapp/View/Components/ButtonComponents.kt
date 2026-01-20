@@ -15,17 +15,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-
+//Composant bouton qui prend une fonction en paramètre et choix du style du bouton, soit en stroke ou plein
 @Composable
 fun ButtonLarge(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    isStroke: Boolean = false // On met false par défaut
+    isStroke: Boolean = false
 ) {
     Button(
         onClick = onClick,
-        // 1. On change la couleur de fond selon isStroke
         colors = ButtonDefaults.buttonColors(
             containerColor = if (isStroke) Color.Transparent else MaterialTheme.colorScheme.primary,
             contentColor = if (isStroke) MaterialTheme.colorScheme.primary else Color.White
@@ -33,7 +32,6 @@ fun ButtonLarge(
         modifier = modifier
             .fillMaxWidth()
             .height(50.dp),
-        // 2. On applique la bordure seulement si isStroke est vrai
         border = if (isStroke) BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else null,
         shape = RoundedCornerShape(4.dp),
     ) {
@@ -44,18 +42,3 @@ fun ButtonLarge(
         )
     }
 }
-
-/*
-            // Vérification de saisie de l'email et du mot de passe avant connexion
-            val isPasswordValid = auth.validatePassword(password)
-
-            // mise à jour des états d'erreurs
-
-            passwordError = !isPasswordValid
-
-            // Si les prérequis des champs sont valide le bouton login est activé
-            if(!uiState.isEmailError && isPasswordValid){
-                auth.login(uiState.email, password)
-                onLoginSuccess()
-            }
- */

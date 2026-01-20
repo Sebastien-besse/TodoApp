@@ -55,6 +55,8 @@ fun PageIndicator(pageSize: Int, currentPage: Int) {
     }
 }
 
+
+// Composant du contenu text de l'onboarding
 @Composable
 fun OnboardingtextComponents(title: Int, text: Int){
     Spacer(modifier = Modifier.height(60.dp))

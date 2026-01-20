@@ -40,7 +40,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        // Le contenu de l'onboarding avec défilement
+        // Le contenu de l'onboarding avec défilement à la page suivante
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxSize()
@@ -52,7 +52,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
             )
         }
 
-        //Bouton pour passer l'onboarding et attérrire sur l'écran de login
+        //Bouton pour passer l'onboarding et atterrir sur l'écran de login
         TextButton(
             onClick = onFinish,
             modifier = Modifier
@@ -74,7 +74,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Bouton pour retourner à la page précèdente
+            // Bouton pour retourner à la page précédente
             TextButton(
                 onClick = {
                     scope.launch {
@@ -89,7 +89,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
                 )
             }
 
-            //Bouton pour aller à la page suivante ou si c'est la dernière page ça envoie à l'ecran de login
+            //Bouton pour aller à la page suivante, ou si c'est la dernière page, ça envoie à l'écran de login
             Button(
                 onClick = {
                     if (pagerState.currentPage < pages.size - 1) {

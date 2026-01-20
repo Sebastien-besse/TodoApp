@@ -17,6 +17,7 @@ fun AppNavigation() {
 
     val navController = rememberNavController()
 
+    // Configuration de la navigation des écrans de l'application
     NavHost(navController = navController, startDestination = IntroRoute) {
         // Écran d'intro
         composable<IntroRoute> {
@@ -40,7 +41,7 @@ fun AppNavigation() {
             )
         }
 
-        // Ecran de l'onboarding
+        // Écran de l'onboarding
         composable<OnboardingRoute> {
             OnboardingScreen(
                 onFinish = {
@@ -49,7 +50,7 @@ fun AppNavigation() {
             )
         }
 
-        //Ecran de démarage pour créer son compte ou se connecter
+        //Écran de démarrage pour choisir si l'on veut se connecter ou s'inscrire
         composable<StartRoute> {
             StartScreen(
                 onLogin = {
@@ -65,6 +66,5 @@ fun AppNavigation() {
         composable<TodoRoute> {
             Todo()
         }
-
     }
 }
