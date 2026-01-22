@@ -11,7 +11,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.sp
 
-
 // Composant de la description du champ de texte
 @Composable
 fun DescriptionComponent(text: String){
@@ -56,7 +55,9 @@ fun TextFieldComponent(
         },
         colors = OutlinedTextFieldDefaults.colors(
             focusedTextColor = Color.White,
-            focusedLabelColor = Color.DarkGray
+            unfocusedTextColor = Color.White,
+            focusedLabelColor = Color.DarkGray,
+            unfocusedLabelColor = Color.LightGray
         ),
         singleLine = true,
         modifier = Modifier.fillMaxWidth(),

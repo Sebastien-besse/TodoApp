@@ -24,10 +24,35 @@ class AuthViewModel: ViewModel() {
         _uiState.update { it.copy(email = newEmail, isEmailError = false) }
     }
 
+    fun updatePassword(newPassword: String){
+        _uiState.update {it.copy(password = newPassword, isPasswordError = false)}
+    }
+
+    fun updateLoginSuccess(value: Boolean){
+        _uiState.update {it.copy(loginSuccess = false)}
+    }
+
     fun checkEmailValidation() {
         val isValid = validateEmail(_uiState.value.email)
         _uiState.update { it.copy(isEmailError = !isValid) }
     }
+
+    fun checkPasswordValidation(){
+        val isPasswordValid = validatePassword(_uiState.value.password)
+        _uiState.update {it.copy(isPasswordError = !isPasswordValid)}
+    }
+
+
+    fun validTextFields(){
+        checkEmailValidation()
+        checkPasswordValidation()
+        if (!uiState.value.isEmailError && !uiState.value.isPasswordError) {
+            println(uiState.value.email)
+            println(uiState.value.password)
+            login(uiState.value.email, uiState.value.password)
+        }
+    }
+
     fun validatePassword(password: String): Boolean{
         return password.length > 6
     }
@@ -36,6 +61,7 @@ class AuthViewModel: ViewModel() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener{ task ->
                 if (task.isSuccessful){
+                    _uiState.update { it.copy(loginSuccess = true) }
                     val user = auth.currentUser
                     Log.d("Auth","Bienvenue: ${user?.email}")
                 }else{

@@ -7,8 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,7 +19,6 @@ import androidx.compose.ui.unit.sp
 import com.example.todoapp.ViewModel.AuthViewModel
 import com.example.todoapp.ui.theme.TodoAppTheme
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -28,12 +26,15 @@ import com.example.todoapp.View.Components.ButtonLarge
 
 
 @Composable
-fun LoginScreen(onLoginSuccess: () -> Unit, auth: AuthViewModel = viewModel<AuthViewModel>()) {
-    var password by remember { mutableStateOf("") }
+fun LoginScreen(onLoginSuccess: () -> Unit, authVM: AuthViewModel = viewModel<AuthViewModel>()) {
 
-    var passwordError by remember { mutableStateOf(false) }
+    val uiState by authVM.uiState.collectAsStateWithLifecycle()
 
-    val uiState by auth.uiState.collectAsStateWithLifecycle()
+    LaunchedEffect(uiState.loginSuccess) {
+        if (uiState.loginSuccess){
+            onLoginSuccess()
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -60,7 +61,7 @@ fun LoginScreen(onLoginSuccess: () -> Unit, auth: AuthViewModel = viewModel<Auth
             TextFieldComponent(
                 text = stringResource(R.string.login_email_label),
                 value = uiState.email,
-                onValueChange = { auth.updateEmail(it) },
+                onValueChange = { authVM.updateEmail(it) },
                 valueError = uiState.isEmailError,
                 refreshError = {},
                 errorMessage = stringResource(R.string.login_email_error),
@@ -72,10 +73,10 @@ fun LoginScreen(onLoginSuccess: () -> Unit, auth: AuthViewModel = viewModel<Auth
             // Champ du mot de passe
             TextFieldComponent(
                 text = stringResource(R.string.login_password_label),
-                password,
-                onValueChange = { password = it },
-                passwordError,
-                refreshError = { passwordError = false },
+                uiState.password,
+                onValueChange = { authVM.updatePassword(it)},
+                uiState.isPasswordError,
+                refreshError = {},
                 stringResource(R.string.login_password_error),
                 stringResource(R.string.login_password_placeholder),
                 visualTransformation = PasswordVisualTransformation()
@@ -86,18 +87,8 @@ fun LoginScreen(onLoginSuccess: () -> Unit, auth: AuthViewModel = viewModel<Auth
             ButtonLarge(
                 text = stringResource(R.string.login_title),
                 onClick = {
-                    auth.checkEmailValidation()
                     // Vérification de saisie de l'email et du mot de passe avant connexion
-                    val isPasswordValid = auth.validatePassword(password)
-
-                    // mise à jour des états d'erreurs
-                    passwordError = !isPasswordValid
-
-                    // Si les prérequis des champs sont valide le bouton login est activé
-                    if (!uiState.isEmailError && isPasswordValid) {
-                        auth.login(uiState.email, password)
-                        onLoginSuccess()
-                    }
+                    authVM.validTextFields()
                 })
         }
     }

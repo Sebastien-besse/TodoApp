@@ -36,7 +36,11 @@ fun AppNavigation() {
         composable<LoginRoute> {
             LoginScreen(
                 onLoginSuccess = {
-                    navController.navigate(TodoRoute)
+                    navController.navigate(TodoRoute){
+                        popUpTo(LoginRoute){
+                            inclusive = true
+                        }
+                    }
                 }
             )
         }
@@ -50,7 +54,7 @@ fun AppNavigation() {
             )
         }
 
-        //Écran de démarrage pour choisir si l'on veut se connecter ou s'inscrire
+        // Écran de démarrage pour choisir si l'on veut se connecter ou s'inscrire
         composable<StartRoute> {
             StartScreen(
                 onLogin = {
