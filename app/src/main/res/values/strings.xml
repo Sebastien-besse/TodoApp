@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">TodoApp</string>
+
+    <string name="login_title">Login</string>
+    <string name="login_email_label">Username</string>
+    <string name="login_email_error">Format de l\'email invalide</string>
+    <string name="login_email_placeholder">Enter your email</string>
+    <string name="login_password_label">Password</string>
+    <string name="login_password_error">Mot de passe trop court</string>
+    <string name="login_password_placeholder">••••••••</string>
+
+    <string name="intro_title">UpTodo</string>
+    <string name="intro_image_description">Logo UpTodo</string>
+
+    <string name="onboarding_title_manage">Manage your tasks</string>
+    <string name="onboarding_title_create">Create daily routine</string>
+    <string name="onboarding_title_orgonaize">Orgonaize your tasks</string>
+    <string name="onboarding_content_manage">You can easily manage all of your daily tasks in DoMe for free</string>
+    <string name="onboarding_content_create">In Uptodo you can create your personalized routine to stay productive</string>
+    <string name="onboarding_content_orgonaize">You can organize your daily tasks by adding your tasks into separate categories</string>
+
+    <string name="onboarding_button_skip">SKIP</string>
+    <string name="onboarding_button_next">NEXT</string>
+    <string name="onboarding_button_started">GET STARTED</string>
+    <string name="onboarding_button_back">BACK</string>
+
+    <string name="start_title">Welcome to UpTodo</string>
+    <string name="start_content">Please login to your account or create new account to continue</string>
+    <string name="start_button_login">LOGIN</string>
+    <string name="start_button_create_account">CREATE ACCOUNT</string>
+
+    <string name="todo_title">Add Task</string>
+
 </resources>

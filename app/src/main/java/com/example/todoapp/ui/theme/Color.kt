@@ -2,13 +2,19 @@ package com.example.todoapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val GrayPrimary = Color(0xFF363636)
+
+val GraySecondary = Color(0xFF979797)
+
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)
 
-val Purple40 = Color(0xFF6650a4)
+val Purple40 = Color(0xFF34348D)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
+
+val Background = Color(0xFF121212)
 
 val PrimaryPurple = Color(0xFF8687E7)
 
@@ -55,7 +61,6 @@ val BlueCategoryFont = Color(0xFF0069A3)
 val RedCategoryBackground = Color(0xFFFF8080)
 
 val RedCategoryFont = Color(0xFFA30000)
-
 
 
 
