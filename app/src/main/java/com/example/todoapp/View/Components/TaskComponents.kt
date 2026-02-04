@@ -35,7 +35,7 @@ fun TaskComponent(todo: Todo, onCompleteClick: (Todo) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp) // Optionnel : petit espace entre les cartes
+            .padding(vertical = 4.dp)
             .height(80.dp)
             .clip(RoundedCornerShape(4.dp))
             .background(MaterialTheme.colorScheme.tertiary)
@@ -64,8 +64,6 @@ fun TaskComponent(todo: Todo, onCompleteClick: (Todo) -> Unit) {
                 style = MaterialTheme.typography.labelSmall
             )
         }
-
-        // 3. Les Badges
         CategoryBadge(category = todo.category)
         PriorityBadge(priority = todo.priority.level)
     }
@@ -75,29 +73,21 @@ fun TaskComponent(todo: Todo, onCompleteClick: (Todo) -> Unit) {
 @Composable
 private fun TaskComponentPreview() {
     TodoAppTheme {
-
-        // 1️⃣ Catégorie mock
         val mockCategory = Category(
             name = "Design",
             color = Color(0xFF00ACC1),
             image = R.drawable.design
         )
-
-        // 2️⃣ Todo mock AVEC id
         val mockTodo = Todo(
-            id = "preview-id-123", // ✅ obligatoire maintenant
+            id = "preview-id-123",
             content = "Faire le design de l'app",
             date = 1738594800000L,
             category = mockCategory,
             priority = Priority.Level1
         )
-
-        // 3️⃣ UI Preview
         TaskComponent(
             todo = mockTodo,
             onCompleteClick = {}
         )
     }
 }
-
-

@@ -66,7 +66,7 @@ fun TitleSheet(viewModel: TodoViewModel) {
         )
         Spacer(modifier = Modifier.height(20.dp))
 
-        ButtonLarge(text = "Next",
+        ButtonLarge(text = stringResource(R.string.task_content_button),
             onClick = {
                 viewModel.nextStep()
             })

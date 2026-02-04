@@ -14,7 +14,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,7 +24,9 @@ import androidx.compose.ui.unit.sp
 import com.example.todoapp.Model.Category
 import com.example.todoapp.Model.State.TodoUiState
 import com.example.todoapp.View.Components.SelectCategoryComponent
-import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.stringResource
+import com.example.todoapp.R
+import com.example.todoapp.View.Components.ButtonLarge
 
 
 @Composable
@@ -40,7 +41,7 @@ fun CategoryPickerSheet(
         onDismissRequest = onDismiss,
         title = {
             Text(
-                text = "Choose Category",
+                text = stringResource(R.string.category_title),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onPrimary,
@@ -75,18 +76,17 @@ fun CategoryPickerSheet(
                 }
             }
         },
+
         confirmButton = {
-            Button(
+
+            ButtonLarge(
+                text = stringResource(R.string.category_button),
                 onClick = onConfirm,
-                enabled = uiState.category != null
-            ) {
-                Text("Save")
-            }
+                modifier = Modifier.fillMaxWidth(),
+                isStroke = false
+            )
+
         },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Cancel")
-            }
-        }
+
     )
 }

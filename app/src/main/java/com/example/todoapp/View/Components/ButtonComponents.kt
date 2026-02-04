@@ -21,7 +21,8 @@ fun ButtonLarge(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    isStroke: Boolean = false
+    isStroke: Boolean = false,
+
 ) {
     Button(
         onClick = onClick,
@@ -34,6 +35,7 @@ fun ButtonLarge(
             .height(50.dp),
         border = if (isStroke) BorderStroke(2.dp, MaterialTheme.colorScheme.primary) else null,
         shape = RoundedCornerShape(4.dp),
+
     ) {
         Text(
             text = text,

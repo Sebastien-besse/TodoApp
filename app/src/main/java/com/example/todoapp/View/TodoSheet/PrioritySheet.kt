@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,7 +13,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -25,11 +25,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.todoapp.Model.Priority
+import com.example.todoapp.R
+import com.example.todoapp.View.Components.ButtonLarge
 import com.example.todoapp.View.Components.SelectPriorityComponent
 
 @Composable
@@ -50,7 +53,7 @@ fun PriorityPickerSheet(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Task Priority",
+                    text = stringResource(R.string.priority_title),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimary,
@@ -88,18 +91,34 @@ fun PriorityPickerSheet(
         }
         ,
         confirmButton = {
-            Button(
-                onClick = {
-                    selectedPriority?.let { onPrioritySelected(it) }
-                },
-                enabled = selectedPriority != null
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Text("Save")
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) {
-                Text("Annuler")
+                // Cancel Button
+                TextButton(
+                    onClick = onDismiss,
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text(
+                        text = stringResource(R.string.priority_button_cancel),
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+
+                // Save Button
+                ButtonLarge(
+                    text = stringResource(R.string.priority_button_save),
+                    onClick = {
+                        selectedPriority?.let {
+                            onPrioritySelected(it)
+                            onDismiss()
+                        }
+                    },
+                    modifier = Modifier.weight(1f),
+                    isStroke = false
+                )
             }
         }
     )

@@ -29,7 +29,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.todoapp.R
 import com.example.todoapp.View.Components.EmptyViewComponent
 import com.example.todoapp.View.Components.TaskComponent
 import com.example.todoapp.View.TodoSheet.CategoryPickerSheet
@@ -59,7 +61,7 @@ fun Todo(viewModel: TodoViewModel = viewModel()){
         ) {
             // Titre de l'écran
             Text(
-                text = "Mes Tâches",
+                text = stringResource(R.string.todo_title),
                 style = MaterialTheme.typography.headlineMedium,
                 color = Color.White,
                 modifier = Modifier.padding(bottom = 16.dp)
@@ -125,33 +127,30 @@ fun Todo(viewModel: TodoViewModel = viewModel()){
                 onDismiss = { viewModel.updateShowSheet(false) }
             )
         }
-
         if (state.currentStep == 3) {
-            PriorityPickerSheet(
-                onPrioritySelected = { priority ->
-                    viewModel.onPriorityChange(priority)
-                    viewModel.nextStep()
-                },
-                onDismiss = { viewModel.updateShowSheet(false) }
-            )
-        }
-
-        if (state.currentStep == 4) {
             CategoryPickerSheet(
                 uiState = state,
                 onCategorySelected = { category ->
                     viewModel.onCategoryChange(category)
                 },
                 onConfirm = {
-                    viewModel.saveTask()
+                    viewModel.nextStep()
                 },
                 onDismiss = {
                     viewModel.updateShowSheet(false)
                 }
             )
         }
-    }
-
+        if (state.currentStep == 4) {
+            PriorityPickerSheet(
+                onPrioritySelected = { priority ->
+                    viewModel.onPriorityChange(priority)
+                    viewModel.saveTask()
+                },
+                onDismiss = { viewModel.updateShowSheet(false) }
+            )
+        }
+}
 
 @Preview
 @Composable

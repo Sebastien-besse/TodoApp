@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -21,10 +22,9 @@ fun EmptyViewComponent() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Image
         Image(
-            painter = painterResource(id = R.drawable.empty_task), // <-- ton drawable
-            contentDescription = "Empty state",
+            painter = painterResource(id = R.drawable.empty_task),
+            contentDescription = "Empty task",
             modifier = Modifier
                 .width(227.dp)
                 .height(227.dp)
@@ -32,9 +32,8 @@ fun EmptyViewComponent() {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Texte principal
         Text(
-            text = "What do you want to do today?",
+            text = stringResource(R.string.todo_empty_question),
             fontSize = 20.sp,
             color = Color.White,
             textAlign = TextAlign.Center
@@ -42,9 +41,8 @@ fun EmptyViewComponent() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Texte secondaire
         Text(
-            text = "Tap + to add your tasks",
+            text = stringResource(R.string.todo_empty_question),
             fontSize = 16.sp,
             color = Color.White,
             textAlign = TextAlign.Center
