@@ -10,5 +10,11 @@ enum class Priority( val level : Int) {
     Level7(7),
     Level8(8),
     Level9(9),
-    Level10(10),
+    Level10(10);
+
+    companion object {
+        fun fromLevel(value: Int): Priority {
+            return values().find { it.level == value } ?: Level1
+        }
+    }
 }

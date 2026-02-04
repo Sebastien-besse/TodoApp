@@ -10,6 +10,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import com.example.todoapp.ui.theme.GrayTertiary
 
 private val DarkColorScheme = darkColorScheme(
     primary = PrimaryPurple,
@@ -17,7 +18,8 @@ private val DarkColorScheme = darkColorScheme(
     tertiary = GrayPrimary,
     background = Background,
     onPrimary = Color.White,
-    onSecondary = GraySecondary
+    onSecondary = GraySecondary,
+    onTertiary = GrayTertiary
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -26,7 +28,8 @@ private val LightColorScheme = lightColorScheme(
     tertiary = GrayPrimary,
     background = Background,
     onPrimary = Color.White,
-    onSecondary = GraySecondary
+    onSecondary = GraySecondary,
+    onTertiary = GrayTertiary
 
 
     /* Other default colors to override

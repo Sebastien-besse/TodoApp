@@ -15,6 +15,7 @@ kotlinxSerialization = "1.9.0"
 roomKtx = "2.8.4"
 material3 = "1.4.0"
 materialIconsExtented = "1.6.7"
+runtime = "1.10.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,10 +35,12 @@ androidx-compose-material3 = { group = "androidx.compose.material3", name = "mat
 androidx-navigation-compose = {group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose"}
 firebase-bom = {group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom"}
 firebase-auth = {group = "com.google.firebase", name= "firebase-auth"}
+firebase-firestore = {group = "com.google.firebase", name = "firebase-firestore"}
 kotlinx-serialization-json = {group = "org.jetbrains.kotlinx", name= "kotlinx-serialization-json", version.ref = "kotlinxSerialization"}
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 material-icons-extended = {group = "androidx.compose.material", name= "material-icons-extended", version.ref = "materialIconsExtented"}
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
 
 
 [plugins]

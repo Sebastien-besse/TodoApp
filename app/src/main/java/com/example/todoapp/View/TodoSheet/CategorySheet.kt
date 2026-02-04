@@ -1,9 +1,7 @@
 package com.example.todoapp.View.TodoSheet
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -18,47 +16,37 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.todoapp.Model.Priority
-import com.example.todoapp.View.Components.SelectPriorityComponent
+import com.example.todoapp.Model.Category
+import com.example.todoapp.Model.State.TodoUiState
+import com.example.todoapp.View.Components.SelectCategoryComponent
+import androidx.compose.ui.graphics.toArgb
+
 
 @Composable
-fun PriorityPickerSheet(
-    onPrioritySelected: (Priority) -> Unit,
+fun CategoryPickerSheet(
+    uiState: TodoUiState,
+    onCategorySelected: (Category) -> Unit,
+    onConfirm: () -> Unit,
     onDismiss: () -> Unit
 ) {
-    var selectedPriority by remember { mutableStateOf<Priority?>(null) }
-
     AlertDialog(
         containerColor = MaterialTheme.colorScheme.tertiary,
-
         onDismissRequest = onDismiss,
-
         title = {
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "Task Priority",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    textAlign = TextAlign.Center
-                )
-            }
+            Text(
+                text = "Choose Category",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimary,
+                textAlign = TextAlign.Center
+            )
         },
-
         text = {
             Column {
                 HorizontalDivider(
@@ -70,36 +58,34 @@ fun PriorityPickerSheet(
                 )
 
                 LazyVerticalGrid(
-                    columns = GridCells.Fixed(4),
-                    contentPadding = PaddingValues(vertical = 8.dp),
+                    columns = GridCells.Fixed(3),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    items(Priority.entries) { priority ->
-                        SelectPriorityComponent(
-                            value = priority.level.toString(),
-                            isSelected = selectedPriority == priority,
-                            onClick = { selectedPriority = priority }
+                    items(uiState.categories) { category ->
+                        SelectCategoryComponent(
+                            value = category.name,
+                            color = category.color,
+                            imageRes = category.image,
+                            isSelected = category == uiState.category,
+                            onClick = { onCategorySelected(category) }
                         )
                     }
                 }
             }
-        }
-        ,
+        },
         confirmButton = {
             Button(
-                onClick = {
-                    selectedPriority?.let { onPrioritySelected(it) }
-                },
-                enabled = selectedPriority != null
+                onClick = onConfirm,
+                enabled = uiState.category != null
             ) {
                 Text("Save")
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Annuler")
+                Text("Cancel")
             }
         }
     )
