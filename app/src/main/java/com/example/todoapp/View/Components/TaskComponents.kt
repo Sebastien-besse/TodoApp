@@ -46,7 +46,7 @@ fun TaskComponent(todo: Todo, onCompleteClick: (Todo) -> Unit) {
         Box(
             modifier = Modifier
                 .size(24.dp)
-                .border(2.dp, Color.White, CircleShape)
+                .border(2.dp, MaterialTheme.colorScheme.onPrimary, CircleShape)
                 .clickable {
                     onCompleteClick(todo)
                 }
@@ -54,7 +54,7 @@ fun TaskComponent(todo: Todo, onCompleteClick: (Todo) -> Unit) {
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = todo.content,
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onPrimary,
                 style = MaterialTheme.typography.bodyLarge
             )
             Spacer(modifier = Modifier.height(4.dp))

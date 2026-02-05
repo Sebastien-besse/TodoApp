@@ -11,8 +11,17 @@ object OnboardingRoute
 object LoginRoute
 
 @Serializable
+object RegisterRoute
+
+@Serializable
 object TodoRoute
 
 @Serializable
 object StartRoute
+
+@Serializable
+object ProfileRoute
+
+
+
 

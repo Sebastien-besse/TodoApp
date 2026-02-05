@@ -41,7 +41,7 @@ fun TitleSheet(viewModel: TodoViewModel) {
             text = stringResource(R.string.todo_title),
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White
+            color = MaterialTheme.colorScheme.onPrimary
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -58,7 +58,7 @@ fun TitleSheet(viewModel: TodoViewModel) {
                 )
             },
             colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = Color.White,
+                focusedTextColor = MaterialTheme.colorScheme.onPrimary,
                 focusedLabelColor = Color.DarkGray
             ),
             modifier = Modifier.fillMaxWidth()

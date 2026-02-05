@@ -40,7 +40,7 @@ fun IntroScreen(){
             text = stringResource(R.string.intro_title),
             fontSize = 40.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White
+            color = MaterialTheme.colorScheme.onPrimary
         )
     }
 }

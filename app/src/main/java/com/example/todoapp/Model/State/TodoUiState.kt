@@ -3,7 +3,7 @@ package com.example.todoapp.Model.State
 import com.example.todoapp.Model.Category
 import com.example.todoapp.Model.Priority
 import com.example.todoapp.Model.Todo
-
+import java.util.Calendar
 
 data class TodoUiState(
     val content: String = "",
@@ -14,5 +14,5 @@ data class TodoUiState(
     val showSheet: Boolean = false,
     val categories: List<Category> = emptyList(),
     val tasks: List<Todo> = emptyList(),
-
+    val calendarState: CalendarUiState = CalendarUiState()
     )

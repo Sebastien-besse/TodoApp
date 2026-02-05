@@ -61,7 +61,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
         ) {
             Text(
                 text = stringResource(R.string.onboarding_button_skip),
-                color = Color.White.copy(alpha = 0.5f),
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f),
                 fontSize = 16.sp
             )
         }
@@ -85,7 +85,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
             ) {
                 Text(
                     text = stringResource(R.string.onboarding_button_back),
-                    color = if (pagerState.currentPage > 0) Color.White.copy(alpha = 0.5f) else Color.Transparent
+                    color = if (pagerState.currentPage > 0) MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.5f) else Color.Transparent
                 )
             }
 
@@ -107,7 +107,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
             ) {
                 Text(
                     text = if (pagerState.currentPage == pages.size - 1) stringResource(R.string.onboarding_button_started) else stringResource(R.string.onboarding_button_next),
-                    color = Color.White
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }

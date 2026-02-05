@@ -27,7 +27,7 @@ import com.example.todoapp.View.Components.OnboardingtextComponents
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StartScreen(onLogin: () -> Unit, onBack: () -> Unit){
+fun StartScreen(onLogin: () -> Unit, onRegister: () -> Unit, onBack: () -> Unit){
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -57,9 +57,7 @@ fun StartScreen(onLogin: () -> Unit, onBack: () -> Unit){
             Spacer(Modifier.size(20.dp))
             ButtonLarge(
                 text = stringResource(R.string.start_button_create_account),
-                onClick = {
-                    onBack()
-                },
+                onClick = onRegister,
                 isStroke = true
             )
         }
@@ -83,5 +81,5 @@ fun StartScreen(onLogin: () -> Unit, onBack: () -> Unit){
 @Preview
 @Composable
 private fun StartPreview(){
-    StartScreen(onLogin = {}, onBack = {})
+    StartScreen(onLogin = {}, onRegister = {},onBack = {})
 }

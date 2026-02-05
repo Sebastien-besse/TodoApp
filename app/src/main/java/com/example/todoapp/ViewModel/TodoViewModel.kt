@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-
+import java.util.Calendar
 
 
 class TodoViewModel(
@@ -103,6 +103,10 @@ class TodoViewModel(
         _uiState.update { it.copy(showSheet = value) }
     }
 
+
+
+
+
     fun resetState() {
         _uiState.update { current ->
             TodoUiState(
@@ -146,5 +150,29 @@ class TodoViewModel(
             }
         }
     }
+
+    fun nextMonth() {
+        _uiState.update { state ->
+            val cs = state.calendarState
+            val (newMonth, newYear) = if (cs.currentMonth == 11) 0 to cs.currentYear + 1 else cs.currentMonth + 1 to cs.currentYear
+            state.copy(calendarState = cs.copy(currentMonth = newMonth, currentYear = newYear))
+        }
+    }
+
+    fun previousMonth() {
+        _uiState.update { state ->
+            val cs = state.calendarState
+            val (newMonth, newYear) = if (cs.currentMonth == 0) 11 to cs.currentYear - 1 else cs.currentMonth - 1 to cs.currentYear
+            state.copy(calendarState = cs.copy(currentMonth = newMonth, currentYear = newYear))
+        }
+    }
+
+    fun selectDate(dateMillis: Long) {
+        _uiState.update { state ->
+            state.copy(calendarState = state.calendarState.copy(selectedDate = dateMillis))
+        }
+    }
+
+
 
 }
